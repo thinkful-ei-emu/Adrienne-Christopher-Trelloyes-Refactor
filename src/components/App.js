@@ -44,20 +44,47 @@ class App extends React.Component {
 }
 
 deleteItem = (list, ids) => {
-  console.log('delete item ran');
+  console.log('delete item ran', list, ids);
   const newList = list.cardIds.filter(card => card !== ids)
-  console.log(newList, list);
-  // const newLists = this.state.lists.map(id => )
+  console.log(newList);
   this.setState({
-    lists: this.state.lists.map((item) => item === list ? list.cardIds = newList : item)
+    lists: this.state.lists.map((item) => item === list ? {id: item.id, header: item.header, cardIds: newList} : item)
     })
-    console.log(this.state.lists);
 }
 
+newRandomCard = () => {
+  const id = Math.random().toString(36).substring(2, 4)
+    + Math.random().toString(36).substring(2, 4);
+  return {
+    id,
+    title: `Random Card ${id}`,
+    content: 'lorem ipsum',
+  }
+}
+
+omit(obj, keyToOmit) {
+  return Object.entries(obj).reduce(
+    (newObj, [key, value]) =>
+        key === keyToOmit ? newObj : {...newObj, [key]: value},
+    {}
+  );
+}
+
+
+moveCard = (list) => {
+  const card = this.newRandomCard();
+  const newList = [...list.cardIds, card.id];
+
+  this.setState({
+    allCards: {...this.state.allCards, [card.id]: card},
+    lists: this.state.lists.map((aList) => aList === list ? {...aList, cardIds: newList} : aList)
+  })
+}
+
+
   render() {
-    // const store = this.props.store
     const lists = this.state.lists.map(list => {
-    const cards = list.cardIds.map(id => this.state.allCards[id]);
+      const cards = list.cardIds.map(id => this.state.allCards[id]);
 
       return (
         <List
@@ -67,6 +94,7 @@ deleteItem = (list, ids) => {
           cards = {cards}
           cardIds = {list.cardIds}
           deleteCard = {this.deleteItem}
+          newCard = {this.moveCard}
         />
       )
     });

@@ -6,7 +6,7 @@ class Card extends React.Component {
     return (
       <div className="Card">
         <button onClick={() => {
-          console.log(this.props.list, this.props.cardIds)
+          console.log('button works');
           this.props.deleteCard(this.props.list, this.props.cardIds)
         }}
         type="button">delete</button>

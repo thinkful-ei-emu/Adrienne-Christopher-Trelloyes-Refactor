@@ -24,6 +24,8 @@ class List extends React.Component {
           <h2>{this.props.header}</h2>
         </header>
         <div className="List-cards">
+          <button onClick={() => {
+          this.props.newCard(this.props.list)}}>Add random card</button>
           {cards}
         </div>
       </section>
