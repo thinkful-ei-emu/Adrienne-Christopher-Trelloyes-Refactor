@@ -49,11 +49,7 @@ deleteItem = (list, ids) => {
   console.log(newList, list);
   // const newLists = this.state.lists.map(id => )
   this.setState({
-    lists: [
-       {
-          cardIds: newList
-      }
-    ]
+    lists: this.state.lists.map((item) => item === list ? list.cardIds = newList : item)
     })
     console.log(this.state.lists);
 }
