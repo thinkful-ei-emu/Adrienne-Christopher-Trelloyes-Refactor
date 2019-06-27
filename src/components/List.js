@@ -12,6 +12,7 @@ class List extends React.Component {
         key={card.id}
         title={card.title}
         content={card.content}
+        deleteCard = {this.props.deleteItem}
       />
     });
     
