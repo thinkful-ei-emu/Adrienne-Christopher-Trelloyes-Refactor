@@ -43,19 +43,19 @@ class App extends React.Component {
   }
 }
 
-deleteItem = (id, cardIds) => {
+deleteItem = (list, ids) => {
   console.log('delete item ran');
-  // const newList = this.state.map(id => id === this.list.id).filter(card => card !== cardIds)
-  // console.log(newList);
-  // // const activeList = this.state.lists.map(list => list === list.id)
-  // // const newList = this.state.lists.filter(lst => {
-  // //   if(lst === list.cardIds) {
-
-  // //   }
-  // // })
-  // this.setState({
-  //     lists: newList
-  //     })
+  const newList = list.cardIds.filter(card => card !== ids)
+  console.log(newList, list);
+  // const newLists = this.state.lists.map(id => )
+  this.setState({
+    lists: [
+       {
+          cardIds: newList
+      }
+    ]
+    })
+    console.log(this.state.lists);
 }
 
   render() {
@@ -66,8 +66,10 @@ deleteItem = (id, cardIds) => {
       return (
         <List
           key={list.id}
+          list={list}
           header={list.header}
           cards = {cards}
+          cardIds = {list.cardIds}
           deleteCard = {this.deleteItem}
         />
       )
