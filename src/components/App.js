@@ -45,11 +45,16 @@ class App extends React.Component {
 
 deleteItem = (list, ids) => {
   console.log('delete item ran', list, ids);
-  const newList = list.cardIds.filter(card => card !== ids)
-  console.log(newList);
+  // const newList = list.cardIds.filter(card => card !== ids)
+  // console.log(newList);
+  const newAllCards = this.omit(this.state.allCards, ids)
   this.setState({
-    lists: this.state.lists.map((item) => item === list ? {id: item.id, header: item.header, cardIds: newList} : item)
+    lists: this.state.lists.map((item) => item ? {id: item.id, header: item.header, cardIds: item.cardIds.filter(card => card !== ids)} : item),
+    allCards: newAllCards
     })
+    console.log(newAllCards, this.state.allCards);
+
+    
 }
 
 newRandomCard = () => {
